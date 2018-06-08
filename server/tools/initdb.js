@@ -19,10 +19,14 @@ let file2 = path.join (__dirname, './platforms.sql')
 files.push (file2)
 let file3 = path.join (__dirname, './communities.sql')
 files.push (file3)
-let file4 = path.join (__dirname, './goods.sql')
+let file4 = path.join (__dirname, './items.sql')
 files.push (file4)
 let file5 = path.join (__dirname, './orders.sql')
 files.push (file5)
+let file6 = path.join (__dirname, './orderlogs.sql')
+files.push (file6)
+let file7 = path.join (__dirname, './users.sql')
+files.push (file7)
 
 const DB = require ('knex') ({
 	client: 'mysql',

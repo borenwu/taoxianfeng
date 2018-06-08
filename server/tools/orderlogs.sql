@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `orderlogs`;
 
- CREATE TABLE `orders` (
+ CREATE TABLE `orderlogs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` DATE,
   `openid` varchar(100) NOT NULL,
   `order_id` varchar(100) NOT NULL,
   `unit` varchar(100) NOT NULL,

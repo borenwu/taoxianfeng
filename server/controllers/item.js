@@ -4,7 +4,7 @@ async function add (ctx, next) {
 	const {name, origin, category, description, platform_id} = ctx.request.body
 	if (name) {
 		try {
-			let id = await mysql ('goods')
+			let id = await mysql ('items')
 				.returning('id')
 				.insert ({
 					name, origin, category, description, platform_id
@@ -27,11 +27,11 @@ async function add (ctx, next) {
 }
 
 async function remove (ctx, next) {
-	const {good_id} = ctx.request.body
-	if (good_id) {
+	const {item_id} = ctx.request.body
+	if (item_id) {
 		try {
-			await mysql ('goods')
-				.where ('id', good_id)
+			await mysql ('items')
+				.where ('id', item_id)
 				.del ()
 			ctx.state.data = {
 				msg: 'success'
@@ -51,12 +51,12 @@ async function find (ctx, next) {
 	const {platform_id} = ctx.request.body
 	if (platform_id) {
 		try {
-			const goods = await mysql ('goods')
+			const items = await mysql ('items')
 				.where ('platform_id', platform_id)
 				.select ('*')
 				.orderBy ('id', 'desc')
 			ctx.state.data = {
-				list: goods
+				list: items
 			}
 		} catch (e) {
 			ctx.state = {
@@ -70,9 +70,9 @@ async function find (ctx, next) {
 }
 
 async function update (ctx, next) {
-	const {good_id, name, origin, category, description} = ctx.request.body
-	await mysql ('goods')
-		.where ('id', good_id)
+	const {item_id, name, origin, category, description} = ctx.request.body
+	await mysql ('items')
+		.where ('id', item_id)
 		.update ({
 			name: name,
 			origin: origin,
