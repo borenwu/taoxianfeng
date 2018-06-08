@@ -27,6 +27,8 @@ let file6 = path.join (__dirname, './orderlogs.sql')
 files.push (file6)
 let file7 = path.join (__dirname, './users.sql')
 files.push (file7)
+let file8 = path.join (__dirname, './images.sql')
+files.push (file8)
 
 const DB = require ('knex') ({
 	client: 'mysql',

@@ -1,16 +1,16 @@
 const {mysql} = require ('../qcloud')
 
 async function add (ctx, next) {
-	const {name, origin, category, description, platform_id} = ctx.request.body
+	const {name, origin, category, description, platform_id, unit, balance} = ctx.request.body
 	if (name) {
 		try {
 			let id = await mysql ('items')
-				.returning('id')
+				.returning ('id')
 				.insert ({
-					name, origin, category, description, platform_id
+					name, origin, category, description, platform_id, unit, balance
 				})
 			ctx.state.data = {
-				id:id[0],
+				id: id[0],
 				name,
 				msg: 'success'
 			}
@@ -70,14 +70,16 @@ async function find (ctx, next) {
 }
 
 async function update (ctx, next) {
-	const {item_id, name, origin, category, description} = ctx.request.body
+	const {item_id, name, origin, category, description, unit, balance} = ctx.request.body
 	await mysql ('items')
 		.where ('id', item_id)
 		.update ({
 			name: name,
 			origin: origin,
 			category: category,
-			description: description
+			description: description,
+			unit: unit,
+			balance: balance
 		})
 }
 
