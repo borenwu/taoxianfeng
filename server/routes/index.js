@@ -50,11 +50,11 @@ router.post ('/updateitem', controllers.item.update)
 router.post ('/addorder', controllers.order.add)
 router.post ('/removeorder', controllers.order.remove)
 router.post ('/findorder', controllers.order.find)
-router.post ('/updateorder', controllers.order.update)
+// router.post ('/updateorder', controllers.order.update)
 
 router.post ('/addorderlog', controllers.orderlog.add)
 router.post ('/removeorderlog', controllers.orderlog.remove)
 router.post ('/findorderlog', controllers.orderlog.find)
-router.post ('/updateorderlog', controllers.orderlog.update)
+// router.post ('/updateorderlog', controllers.orderlog.update)
 
 module.exports = router

@@ -1,13 +1,13 @@
 const {mysql} = require ('../qcloud')
 
 async function add (ctx, next) {
-	const {item_id, description, market_price, sale_price, platform_id, community_id} = ctx.request.body
+	const {item_id, description, market_price, sale_price, platform_id, community_id, open_date, close_date} = ctx.request.body
 	if (name) {
 		try {
 			let id = await mysql ('orders')
 				.returning ('id')
 				.insert ({
-					item_id, description, market_price, sale_price, platform_id, community_id
+					item_id, description, market_price, sale_price, platform_id, community_id, open_date, close_date
 				})
 			ctx.state.data = {
 				id: id[0],
@@ -85,5 +85,5 @@ module.exports = {
 	add,
 	remove,
 	find,
-	update
+	// update
 }
