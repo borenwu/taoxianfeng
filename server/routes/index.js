@@ -36,6 +36,7 @@ router.post ('/addplatform', controllers.platform.add)
 router.post ('/removeplatform', controllers.platform.remove)
 router.post ('/findplatform', controllers.platform.find)
 router.post ('/updateplatform', controllers.platform.update)
+router.post ('/signInPlatform', controllers.platform.signIn)
 
 router.post ('/addcommunity', controllers.community.add)
 router.post ('/removecommunity', controllers.community.remove)

@@ -15,14 +15,17 @@ async function add (ctx, next) {
 		}
 		
 		try {
+			// 生成一个密钥,以后改成随机数
+			let secret = '1234'
 			let id = await mysql('platforms')
 				.returning('id')
 				.insert({
-					platform_name, province, city, description
+					platform_name, province, city, description,secret
 				})
 			ctx.state.data = {
 				id:id[0],
 				platform_name,
+				secret,
 				msg: 'success'
 			}
 		} catch (e) {
@@ -111,10 +114,44 @@ async function update (ctx, next) {
 		})
 }
 
+async function signIn(ctx, next){
+	const {platform_name,secret} = ctx.request.body
+	console.log(platform_name)
+	console.log(secret)
+	if(platform_name && secret){
+		try{
+			const platform = await mysql('platforms')
+				.where('platform_name',platform_name)
+				.andWhere('secret',secret)
+				.select('*')
+			if(platform.length > 0){
+				ctx.state.data = {
+					platform:platform[0]
+				}
+			}else{
+				ctx.state = {
+					code: -2,
+					data: {
+						msg: '平台或密钥不正确：' + e.sqlMessage
+					}
+				}
+			}
+		} catch(e){
+			ctx.state = {
+				code: -1,
+				data: {
+					msg: '激活失败：' + e.sqlMessage
+				}
+			}
+		}
+	}
+}
+
 
 module.exports = {
 	add,
 	remove,
 	find,
-	update
+	update,
+	signIn
 }
